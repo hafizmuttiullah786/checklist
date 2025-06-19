@@ -26,6 +26,9 @@ import SignUp from "./component/SignUp";
 import ForgotPassword from "./component/ForgotPassword";
 import Otp from "./component/Otp";
 import LoginScreen from "./Screens/LoginScreen";
+import SignupScreen from "./Screens/SignupScreen";
+import ForgotPasswordScreen from "./Screens/ForgotPasswordScreen";
+import OtpScreen from "./Screens/OtpScreen";
 
 function App() {
   return (
@@ -43,9 +46,9 @@ function App() {
       <Route path="/certificate-tracking" element={<CertificateTracking />} />
       <Route path="/submission-report" element={<SubmissionReport />} />
       <Route path="/login" element={<LoginScreen />} />
-      <Route path="/signup" element={<SignUp />} />
-      <Route path="/forgotpassowrd" element={<ForgotPassword />} />
-      <Route path="/otp" element={<Otp />} />
+      <Route path="/signup" element={<SignupScreen />} />
+      <Route path="/forgotpassowrd" element={<ForgotPasswordScreen />} />
+      <Route path="/otp" element={<OtpScreen />} />
     </Routes>
   );
 }
