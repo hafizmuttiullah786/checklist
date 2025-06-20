@@ -997,6 +997,8 @@ select {
   align-items: flex-end;
   column-gap: 7px;
   margin-left: auto;
+  justify-content: flex-end;
+  margin-top: 20px;
   cursor: pointer;
   transition: 0.3s linear;
 }
@@ -1571,6 +1573,311 @@ input::-webkit-inner-spin-button {
 
 .menubar {
   display: none;
+}
+
+.user_detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user_card {
+  width: 23%;
+  text-align: center;
+  border-radius: 12px;
+  padding: 60px 0px;
+
+}
+
+.user_card p {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 39px;
+  color: #FFFBFB;
+  margin: 10px 0px !important;
+}
+
+.user_card span {
+  min-height: 47px;
+  display: block;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #FFFBFB;
+}
+
+.green_user_card {
+  border: 1px solid #227974;
+  background: #20B1A9;
+}
+
+.user_card.purple_card {
+  border: 1px solid #6898d8;
+  background: #7FB3F9;
+}
+
+.userIcon img {
+  width: 60px;
+}
+
+.pending_card {
+  background: #FF776B;
+  border: 1px solid #91362d;
+}
+
+.billingTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.statusSelec span {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #000000;
+  margin-right: 20px;
+}
+
+.statusSelec select {
+  padding: 10px 20px;
+  width: 250px;
+  background: #FFFFFF;
+  border-radius: 12px;
+}
+
+.csv_pdf button {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  border-radius: 12px;
+  padding: 12px 30px;
+  transition: .3s linear;
+}
+
+.csv_pdf button:hover {
+  opacity: 0.7;
+}
+
+.csv {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  color: #000000;
+  background: #FFFFFF;
+}
+
+.pdf_btn {
+  color: #fff;
+  border: 1px solid transparent;
+  background: #003B89;
+  margin-left: 20px;
+}
+
+.usernameIcon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  color: #fff;
+  background: #E9975D;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-gap i {
+  color: #323232;
+  font-size: 20px;
+}
+
+.administrator {
+  padding: 5px 10px;
+  background: #DDF7F4;
+  border-radius: 6px;
+  border: none;
+}
+
+.employee {
+  padding: 5px 10px;
+  background: #E3E7F1;
+  border-radius: 6px;
+  border: none;
+}
+
+.flex-gap .pdf_btn,
+.flex-gap .csv {
+  padding: 5px 20px;
+  margin-left: unset;
+  border-radius: 6px;
+}
+
+.createChecklist {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: unset;
+}
+
+.createChecklist button {
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  padding: 12px 30px;
+  background: #222222;
+  border-radius: 10px;
+  transition: .3s linear;
+}
+
+.createChecklist button:hover {
+  opacity: 0.7;
+}
+
+.duesoon {
+  padding: 5px 10px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #FFFFFF;
+  background: #FFBE00;
+  border-radius: 6px;
+  border: none;
+}
+
+.archived {
+  padding: 5px 10px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #FFFFFF;
+  background: #7545F4;
+  border-radius: 6px;
+  border: none;
+
+}
+
+.completed {
+  padding: 5px 10px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #FFFFFF;
+  background: #3FCEA3;
+  border-radius: 6px;
+  border: none;
+}
+
+.taskbtn {
+  font-style: normal;
+  font-weight: 400;
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 18px;
+  color: #FA1935;
+  background: #FFFFFF;
+  border: 1px solid #FA1935;
+  border-radius: 6px;
+}
+
+.yellowBar {
+  width: 70%;
+  display: inline-block;
+  margin-right: 5px;
+  height: 4px;
+  background: #FBDA7A;
+  border-radius: 12px;
+  position: relative;
+}
+
+.yellowBar .percenCompleted {
+  width: 40%;
+  height: 100%;
+  background-color: #8a722a;
+}
+
+.purpleBar {
+  width: 70%;
+  display: inline-block;
+  margin-right: 5px;
+  height: 4px;
+  background: #AD91F8;
+  border-radius: 12px;
+  position: relative;
+}
+
+.yellow-completed {
+  width: 40%;
+  height: 100%;
+  background-color: #7545F4;
+}
+
+.greenBar {
+  width: 70%;
+  display: inline-block;
+  margin-right: 5px;
+  height: 4px;
+  background: #3FCEA3;
+  border-radius: 12px;
+  position: relative;
+}
+
+.green-completed {
+  width: 40%;
+  height: 100%;
+  background-color: #2c8469;
+}
+
+.paid_btn {
+  padding: 5px 10px;
+  background-color: #78B557;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  color: #FFFFFF;
+}
+
+.overdue_btn {
+  padding: 5px 10px;
+  background-color: #C74F4F;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  color: #FFFFFF;
+}
+
+.unpaid_btn {
+  padding: 5px 10px;
+  background-color: #90928E;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  color: #FFFFFF;
+}
+
+.refund_btn {
+  padding: 5px 10px;
+  background-color: #3E6497;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  color: #FFFFFF;
 }
 
 @media (max-width:1550px) {

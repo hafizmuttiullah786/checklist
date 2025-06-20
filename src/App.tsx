@@ -29,11 +29,21 @@ import LoginScreen from "./Screens/LoginScreen";
 import SignupScreen from "./Screens/SignupScreen";
 import ForgotPasswordScreen from "./Screens/ForgotPasswordScreen";
 import OtpScreen from "./Screens/OtpScreen";
+import Home from "./component/Home";
+import Billing from "./component/Billing";
+import UserManagment from "./component/UserManagment";
+import CheckList from "./component/CheckList";
+import PaymentInquiry from "./component/PaymentInquiry";
 
 function App() {
   return (
     <Routes>
-      <Route path="/*" element={<Navigate to="/profile" replace />} />
+      {/* <Route path="/*" element={<Navigate to="/profile" replace />} /> */}
+      <Route path="/" element={<Home />} />
+      <Route path="/billing" element={<Billing />} />
+      <Route path="/user-managment" element={<UserManagment />} />
+      <Route path="/check-list" element={<CheckList />} />
+      <Route path="/payment-inquiry" element={<PaymentInquiry />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/training" element={<MyTraining />} />
       <Route path="/safty" element={<SaftyAwearness />} />
