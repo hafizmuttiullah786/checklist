@@ -926,7 +926,52 @@ label {
 }
 
 .__inputField {
+  position: relative;
   margin-bottom: 30px;
+}
+
+.requiredInput {
+  width: 70%;
+  position: relative;
+}
+
+.__inputField .required {
+  margin-bottom: 0px;
+
+}
+
+.__inputField .required {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 15px;
+  color: #AAAAAA;
+}
+
+.__inputField .requiredInput input {
+  margin-bottom: 0px !important;
+}
+
+.addItem_btn {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  color: #000000;
+  background: #E0E0E0;
+  border: 1px solid #EEEEEE;
+  border-radius: 6px;
+  width: 27%;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 
 .__inputField p {
@@ -1837,7 +1882,7 @@ input::-webkit-inner-spin-button {
 }
 
 .paid_btn {
-  padding: 5px 10px;
+  padding: 5px 15px;
   background-color: #78B557;
   font-family: 'Poppins';
   font-style: normal;
@@ -1845,21 +1890,25 @@ input::-webkit-inner-spin-button {
   font-size: 14px;
   line-height: 21px;
   color: #FFFFFF;
+  border-radius: 5px;
+  border: none;
 }
 
 .overdue_btn {
-  padding: 5px 10px;
+  padding: 5px 15px;
   background-color: #C74F4F;
   font-family: 'Poppins';
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
   line-height: 21px;
+  border-radius: 5px;
+  border: none;
   color: #FFFFFF;
 }
 
 .unpaid_btn {
-  padding: 5px 10px;
+  padding: 5px 15px;
   background-color: #90928E;
   font-family: 'Poppins';
   font-style: normal;
@@ -1867,10 +1916,12 @@ input::-webkit-inner-spin-button {
   font-size: 14px;
   line-height: 21px;
   color: #FFFFFF;
+  border-radius: 5px;
+  border: none;
 }
 
 .refund_btn {
-  padding: 5px 10px;
+  padding: 5px 15px;
   background-color: #3E6497;
   font-family: 'Poppins';
   font-style: normal;
@@ -1878,6 +1929,164 @@ input::-webkit-inner-spin-button {
   font-size: 14px;
   line-height: 21px;
   color: #FFFFFF;
+  border-radius: 5px;
+  border: none;
+}
+
+.formFields {}
+
+
+.form__paremt {
+  padding: 30px 20px;
+  background-color: #fff;
+  border-radius: 22px;
+  margin-bottom: 20px;
+  border: 1px solid #CCCCCC
+}
+
+.formFields {
+  display: flex;
+  column-gap: 5%;
+  row-gap: 20px;
+  flex-wrap: wrap;
+}
+
+.__input__group {
+  width: 30%;
+}
+
+.__input__group select {}
+
+.__input__group select,
+.__input__group input {
+  padding: 15px;
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  width: 100%;
+  color: #AAAAAA;
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.react-datepicker-wrapper input {
+  text-align: center;
+}
+
+.upload-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-family: "Inter", sans-serif;
+}
+
+.upload-label {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.upload-button {
+  background-color: #e5e5e5;
+  color: black;
+  font-weight: 500;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  gap: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.upload-button:hover {
+  background-color: #dcdcdc;
+}
+
+.visibilityInputField {
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+}
+
+.visibilityInputField input {
+  width: 20px;
+  height: 20px;
+  margin-bottom: 0px;
+}
+
+.visibilityInputField span {
+  display: inline;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  color: #000000;
+}
+
+.create_Checklist button {
+  width: 207px;
+  height: 45px;
+  background: #003B89;
+  border-radius: 12px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  border: none;
+  color: #FFFFFF;
+  transition: .3s linear;
+}
+
+.create_Checklist button:hover {
+  opacity: 0.7;
+}
+
+.create_Checklist {
+  text-align: right;
+}
+
+.notification_card {
+  width: 100%;
+  max-width: 85%;
+  margin: 20px auto;
+  padding: 22px 40px;
+  background: #FFFFFF;
+  border: 1px solid #000000;
+  border-radius: 12px;
+}
+
+.notification_card p {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 27px;
+  color: #000000;
+}
+
+.notification_card img {
+  width: 50px;
+}
+
+.hoursAgo {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 27px;
+  color: #000000;
 }
 
 @media (max-width:1550px) {

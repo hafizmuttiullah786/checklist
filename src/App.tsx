@@ -12,19 +12,6 @@ import Profile from "./component/Profile";
 import "remixicon/fonts/remixicon.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/style.css";
-import MyTraining from "./component/MyTraining";
-import SaftyAwearness from "./component/SaftyAwearness";
-import MyCertificates from "./component/MyCertificates";
-import MyDocuments from "./component/MyDocuments";
-import AccidentForm from "./component/AccidentForm";
-import ExpenseForm from "./component/ExpenseForm";
-import HolidayForm from "./component/HolidayForm";
-import TeamOverview from "./component/TeamOverview";
-import CertificateTracking from "./component/CertificateTracking";
-import SubmissionReport from "./component/SubmissionReport";
-import SignUp from "./component/SignUp";
-import ForgotPassword from "./component/ForgotPassword";
-import Otp from "./component/Otp";
 import LoginScreen from "./Screens/LoginScreen";
 import SignupScreen from "./Screens/SignupScreen";
 import ForgotPasswordScreen from "./Screens/ForgotPasswordScreen";
@@ -34,6 +21,8 @@ import Billing from "./component/Billing";
 import UserManagment from "./component/UserManagment";
 import CheckList from "./component/CheckList";
 import PaymentInquiry from "./component/PaymentInquiry";
+import NewChecklist from "./component/NewChecklist";
+import Notification from "./component/Notification"
 
 function App() {
   return (
@@ -45,16 +34,8 @@ function App() {
       <Route path="/check-list" element={<CheckList />} />
       <Route path="/payment-inquiry" element={<PaymentInquiry />} />
       <Route path="/profile" element={<Profile />} />
-      <Route path="/training" element={<MyTraining />} />
-      <Route path="/safty" element={<SaftyAwearness />} />
-      <Route path="/mycertificates" element={<MyCertificates />} />
-      <Route path="/mydocuments" element={<MyDocuments />} />
-      <Route path="/accidentform" element={<AccidentForm />} />
-      <Route path="/expenseform" element={<ExpenseForm />} />
-      <Route path="/holidayform" element={<HolidayForm />} />
-      <Route path="/team-overview" element={<TeamOverview />} />
-      <Route path="/certificate-tracking" element={<CertificateTracking />} />
-      <Route path="/submission-report" element={<SubmissionReport />} />
+      <Route path="/newchecklist" element={<NewChecklist/>} />
+      <Route path="/notification" element={<Notification/>} />
       <Route path="/login" element={<LoginScreen />} />
       <Route path="/signup" element={<SignupScreen />} />
       <Route path="/forgotpassowrd" element={<ForgotPasswordScreen />} />

@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import SideBar from "./SideBar";
 import TopBar from "./TopBar";
+import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 const PaymentInquiry = () => {
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
   return (
     <>
       <div className="__dashboard">
@@ -10,7 +15,7 @@ const PaymentInquiry = () => {
           <div className="__dashboardRightSide">
             <TopBar />
             <div className="__dashboardContent">
-              <div className="__pageHeading">Billing</div>
+              <div className="__pageHeading">Payment Inquiries</div>
               <div className="__myTraining">
                 <div className="billingTop">
                   <div className="statusSelec">
@@ -24,6 +29,52 @@ const PaymentInquiry = () => {
                     <button className="pdf_btn">Export to PDF</button>
                   </div>
                 </div>
+                <div className="form__paremt">
+                  <div className="formFields">
+                    <div className="__input__group">
+                      <label htmlFor="">User Name/Email</label>
+                      <input type="email" placeholder="abcd1234@gmail.com" />
+                    </div>
+                    <div className="__input__group">
+                      <label htmlFor="">Payment Status</label>
+                      <select name="" id="">
+                        <option value="">All Statuses</option>
+                      </select>
+                    </div>
+                    <div className="__input__group">
+                      <label htmlFor="">Date Range</label>
+                      <div className="date-range-container">
+                        <DatePicker
+                          selected={startDate}
+                          onChange={(
+                            dates: [Date | null, Date | null],
+                            event: React.SyntheticEvent<any> | undefined
+                          ) => {
+                            const [start, end] = dates;
+                            setStartDate(start);
+                            setEndDate(end);
+                          }}
+                          startDate={startDate}
+                          endDate={endDate}
+                          selectsRange
+                          placeholderText="Start Date - End Date"
+                          className="date-input"
+                        />
+                      </div>
+                    </div>
+                    <div className="__input__group">
+                      <label htmlFor="">Payment Method</label>
+                      <select name="" id="">
+                        <option value="">All Methods</option>
+                      </select>
+                    </div>
+                    <div className="__input__group">
+                      <label htmlFor="">Actions</label>
+                      <input type="email" placeholder="view" />
+                    </div>
+                  </div>
+                </div>
+
                 <div className="row">
                   <div className="col-lg-12 col-12">
                     <div className="__defaultTable">
@@ -31,107 +82,61 @@ const PaymentInquiry = () => {
                         <thead>
                           <tr>
                             <th>User Name</th>
-                            <th>Completed Checklists</th>
-                            <th>Total Bill Amount</th>
-                            <th>Amount Paid</th>
-                            <th>Expiration</th>
-                            <th>Actions</th>
+                            <th>Email</th>
+                            <th>Invoice ID</th>
+                            <th>Payment Date</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Method</th>
                           </tr>
                         </thead>
                         <tbody>
                           <tr>
-                            <td>
-                              <div className="flex-gap">
-                                <div className="usernameIcon">U</div>
-                                User Name
-                              </div>
-                            </td>
-                            <td>27</td>
+                            <td>User Name</td>
+                            <td>abcd1234@ gamil.com</td>
+                            <td>INV-00123</td>
+                            <td>May 30, 2025</td>
                             <td>$200.00</td>
-                            <td>$150.00</td>
-                            <td className="redtdText">$0.00</td>
                             <td>
-                              <div className="flex-gap">
-                                <a href="#">
-                                  <i className="ri-error-warning-line"></i>
-                                </a>
-                                <a href="#">
-                                  <i className="ri-eye-line"></i>
-                                </a>
-                              </div>
+                              <button className="paid_btn">Paid</button>
                             </td>
+                            <td>PayPal</td>
                           </tr>
                           <tr>
-                            <td>
-                              <div className="flex-gap">
-                                <div className="usernameIcon">U</div>
-                                User Name
-                              </div>
-                            </td>
-                            <td>27</td>
+                            <td>User Name</td>
+                            <td>abcd1234@ gamil.com</td>
+                            <td>INV-00123</td>
+                            <td>May 30, 2025</td>
                             <td>$200.00</td>
-                            <td>$150.00</td>
-                            <td className="redtdText">$0.00</td>
                             <td>
-                              <div className="flex-gap">
-                                <a href="#">
-                                  <i className="ri-error-warning-line"></i>
-                                </a>
-                                <a href="#">
-                                  <i className="ri-eye-line"></i>
-                                </a>
-                              </div>
+                              <button className="overdue_btn">Paid</button>
                             </td>
+                            <td>PayPal</td>
                           </tr>
                           <tr>
-                            <td>
-                              <div className="flex-gap">
-                                <div className="usernameIcon">U</div>
-                                User Name
-                              </div>
-                            </td>
-                            <td>27</td>
+                            <td>User Name</td>
+                            <td>abcd1234@ gamil.com</td>
+                            <td>INV-00123</td>
+                            <td>May 30, 2025</td>
                             <td>$200.00</td>
-                            <td>$150.00</td>
-                            <td className="redtdText">$0.00</td>
                             <td>
-                              <div className="flex-gap">
-                                <a href="#">
-                                  <i className="ri-error-warning-line"></i>
-                                </a>
-                                <a href="#">
-                                  <i className="ri-eye-line"></i>
-                                </a>
-                              </div>
+                              <button className="unpaid_btn">Paid</button>
                             </td>
+                            <td>PayPal</td>
                           </tr>
                           <tr>
-                            <td>
-                              <div className="flex-gap">
-                                <div className="usernameIcon">U</div>
-                                User Name
-                              </div>
-                            </td>
-                            <td>27</td>
+                            <td>User Name</td>
+                            <td>abcd1234@ gamil.com</td>
+                            <td>INV-00123</td>
+                            <td>May 30, 2025</td>
                             <td>$200.00</td>
-                            <td>$150.00</td>
-                            <td className="redtdText">$0.00</td>
                             <td>
-                              <div className="flex-gap">
-                                <a href="#">
-                                  <i className="ri-error-warning-line"></i>
-                                </a>
-                                <a href="#">
-                                  <i className="ri-eye-line"></i>
-                                </a>
-                              </div>
+                              <button className="refund_btn">Paid</button>
                             </td>
+                            <td>PayPal</td>
                           </tr>
                         </tbody>
                       </table>
-                    </div>
-                    <div className="__NexStep">
-                      Next <i className="ri-arrow-right-line"></i>
                     </div>
                   </div>
                 </div>

@@ -21,10 +21,10 @@ const TopBar = () => {
               <input type="text" placeholder="search" />
               <i className="ri-search-line"></i>
             </div>
-            {/* <div className="__notificationBar flex-cemter">
+            <a href="/notification" className="__notificationBar flex-cemter">
               <i className="ri-notification-line"></i>
-            </div> */}
-            <Dropdown>
+            </a>
+            {/* <Dropdown>
               <Dropdown.Toggle
                 variant="light"
                 id="dropdown-notification"
@@ -41,7 +41,7 @@ const TopBar = () => {
                   Another notification
                 </Dropdown.Item>
               </Dropdown.Menu>
-            </Dropdown>
+            </Dropdown> */}
             {/* <div className="__userProfile flex-gap">
               <div className="__avatar flex-cemter">
                 <img src={avatar} alt="avatar" />
@@ -63,14 +63,19 @@ const TopBar = () => {
                 <div className="__userName">
                   Huzaifa Khayam <i className="ri-arrow-down-s-line"></i>
                 </div>
-                <i className="ri-arrow-down-s-line"></i>
-              </Dropdown.Toggle>
+                </Dropdown.Toggle>
 
               <Dropdown.Menu className="userProfilemenu">
                 <Dropdown.Item href="#/profile">
                   <div className="flex-gap">
                     <i className="ri-user-line"></i>
                     My Profile
+                  </div>
+                </Dropdown.Item>
+                <Dropdown.Item href="/login">
+                  <div className="flex-gap">
+                    <i className="ri-user-line"></i>
+                    Login
                   </div>
                 </Dropdown.Item>
                 <Dropdown.Item href="#/logout">

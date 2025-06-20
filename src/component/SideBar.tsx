@@ -33,7 +33,7 @@ const SideBar = () => {
     <>
       <div className={`__sideBar ${isOpen ? "active" : ""}`}>
         <div className="logo">
-          <img src={logo} alt="logo" />
+          <img src={logo} alt="logo" style={{opacity:"0"}} />
           <a href="#" className="backArrow" onClick={handleMenuClick}>
             <i className="ri-arrow-left-line"></i>
           </a>
