@@ -12,7 +12,7 @@ const SignupScreen = () => {
   const navigate = useNavigate();
 
   const onSignUpPressed = (signupData: SignUpData) => {
-    navigate("/forgotpassowrd", { state: { signupData: signupData } });
+    navigate("/forgotpassword", { state: { signupData: signupData } });
   };
   return <SignUp onSignUpPressed={onSignUpPressed} />;
 };

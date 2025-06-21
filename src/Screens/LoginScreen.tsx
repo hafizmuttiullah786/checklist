@@ -6,6 +6,7 @@ import { ILoginApiResp } from "../types/get/LoginType";
 import { Apinames } from "../utils/Apiname";
 import useUserStore from "../utils/userStore";
 import { useNavigate } from "react-router-dom";
+import { setCookie } from "../utils/Common";
 
 const LoginScreen = () => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -22,6 +23,8 @@ const LoginScreen = () => {
       if (response.result) {
         console.log("resspon");
         setUser(response.result);
+        global.authToken=response.result.token;
+        setCookie(response.result);
         navigate("/profile");
       }
     } catch (error: any) {

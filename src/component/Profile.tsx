@@ -1,8 +1,27 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import SideBar from "./SideBar";
 import TopBar from "./TopBar";
 import profileAvatar from "../Assets/imgs/profileAvatar.webp"
+import { IUserProfile } from '../types/post/Interface';
+import { getCookie } from '../utils/Common';
 const Profile = () => {
+  const [userData, setUserData] = useState<IUserProfile | null>(null);
+
+  useEffect(() => {
+    const cookie: any = getCookie("data");
+    if (cookie) {
+      try {
+        setUserData(cookie);
+      } catch (error) {
+        console.error("Invalid cookie data:", error);
+      }
+    }
+  }, []);
+
+
+
+
+
   return (
     <>
       <div className="__dashboard">
@@ -20,37 +39,36 @@ const Profile = () => {
                       <div className="__profileAvatar">
                         <img src={profileAvatar} alt="avatar" />
                       </div>
-                      <div className="__profileuserName">Khayam</div>
-                      <div className="__userjob">Ui Ux Designer</div>
+                      <div className="__profileuserName">{userData?.name}</div>
+                      <div className="__userjob" style={{ textAlign: 'center' }}>{userData?.role}</div>
                     </div>
-                    <button className="__editBtn">Edit</button>
+                    {/* <button className="__editBtn">Edit</button> */}
                   </div>
                   <div className="__userDetailBox">
                     <div className="flex">
                       <div className="__leftSide">
                         <div className="__detail">
                           <p>Email</p>
-                          <span>abcd1234@gmail.com</span>
+                          <span>{userData?.email}</span>
                         </div>
-                        <div className="__detail mb-0">
-                          <p>Email</p>
-                          <span>abcd1234@gmail.com</span>
-                        </div>
+                        {userData?.department && (
+                          <div className="__detail mb-0">
+                            <p>Department</p>
+                            <span>{userData.department}</span>
+                          </div>
+                        )}
+
                       </div>
                       <div className="__rightSide">
                         <div className="__detail">
-                          <p>Phone</p>
-                          <span>+1 (123) 456-7890</span>
+                          <p>Status</p>
+                          <span>{userData?.status}</span>
                         </div>
 
-                        <div className="__detail mb-0">
-                          <p>Location</p>
-                          <span>San Francico, CA</span>
-                        </div>
                       </div>
                     </div>
                   </div>
-                  <div className="__aboutMe">About Me</div>
+                  {/* <div className="__aboutMe">About Me</div>
                   <div className="__aboutContent">
                     Passionate UI/UX Designer with experience of crafting
                     attractive interfaces and delightful user experiences.
@@ -59,22 +77,7 @@ const Profile = () => {
                     <a href='#' className="__icon">
                       <i className="ri-facebook-circle-fill"></i>
                     </a>
-                    <a href='#' className="__icon">
-                      <i className="ri-facebook-circle-fill"></i>
-                    </a>
-                    <a href='#' className="__icon">
-                      <i className="ri-facebook-circle-fill"></i>
-                    </a>
-                    <a href='#' className="__icon">
-                      <i className="ri-facebook-circle-fill"></i>
-                    </a>
-                    <a href='#' className="__icon">
-                      <i className="ri-facebook-circle-fill"></i>
-                    </a>
-                    <a href='#' className="__icon">
-                      <i className="ri-facebook-circle-fill"></i>
-                    </a>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

@@ -1,7 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import avatar from "../Assets/imgs/avatar.webp";
 import { Dropdown } from "react-bootstrap";
+import { getCookie, onpressLogoutBtn } from "../utils/Common";
+import { Link } from "react-router-dom";
 const TopBar = () => {
+
+  const [userName, setUserName] = useState<string>("");
+
+  useEffect(() => {
+    // Get user data from cookie
+    const cookie: any = getCookie("data");
+    if (cookie) {
+      try {
+        console.log("cookie data:", cookie);
+        setUserName(cookie?.name || "User");
+      } catch (err) {
+        console.error("Invalid cookie data:", err);
+      }
+    }
+  }, []);
   const handleMenuClick = () => {
     window.dispatchEvent(new Event("toggleSidebar"));
   };
@@ -17,40 +34,15 @@ const TopBar = () => {
           </div>
 
           <div className="__TopRightSide flex-gap">
-            <div className="__searchInput">
+            {/* <div className="__searchInput">
               <input type="text" placeholder="search" />
               <i className="ri-search-line"></i>
-            </div>
-            <a href="/notification" className="__notificationBar flex-cemter">
-              <i className="ri-notification-line"></i>
-            </a>
-            {/* <Dropdown>
-              <Dropdown.Toggle
-                variant="light"
-                id="dropdown-notification"
-                className="__notificationBar flex-cemter"
-              >
-                <i className="ri-notification-line"></i>
-              </Dropdown.Toggle>
-
-              <Dropdown.Menu className="__notificationdropDown">
-                <Dropdown.Item href="#/action-1">
-                  No new notifications
-                </Dropdown.Item>
-                <Dropdown.Item href="#/action-2">
-                  Another notification
-                </Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown> */}
-            {/* <div className="__userProfile flex-gap">
-              <div className="__avatar flex-cemter">
-                <img src={avatar} alt="avatar" />
-              </div>
-              <div className="__userName ">
-                Huzaifa Khayam
-                <i className="ri-arrow-down-s-line"></i>
-              </div>
             </div> */}
+
+            <Link to="/notification" className="__notificationBar flex-cemter">
+              <i className="ri-notification-line"></i>
+            </Link>
+
             <Dropdown>
               <Dropdown.Toggle
                 as="div"
@@ -61,25 +53,20 @@ const TopBar = () => {
                   <img src={avatar} alt="avatar" />
                 </div>
                 <div className="__userName">
-                  Huzaifa Khayam <i className="ri-arrow-down-s-line"></i>
+                  {userName || "User"} <i className="ri-arrow-down-s-line"></i>
                 </div>
-                </Dropdown.Toggle>
+              </Dropdown.Toggle>
 
               <Dropdown.Menu className="userProfilemenu">
-                <Dropdown.Item href="#/profile">
+                <Dropdown.Item as={Link} to="/profile">
                   <div className="flex-gap">
                     <i className="ri-user-line"></i>
                     My Profile
                   </div>
                 </Dropdown.Item>
-                <Dropdown.Item href="/login">
-                  <div className="flex-gap">
-                    <i className="ri-user-line"></i>
-                    Login
-                  </div>
-                </Dropdown.Item>
-                <Dropdown.Item href="#/logout">
-                  <div className="flex-gap">
+
+                <Dropdown.Item>
+                  <div className="flex-gap" onClick={() => onpressLogoutBtn()}>
                     <i className="ri-logout-box-r-line"></i>
                     Logout
                   </div>

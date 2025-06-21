@@ -1,8 +1,9 @@
 import axios from "axios";
 import { baseUrl } from "../Configs/Constants";
-import { logout } from "../utils/Common";
+import { initializeAuthToken, logout } from "../utils/Common";
 
 export const getRequest = async (endPoint: string) => {
+  initializeAuthToken(); 
   try {
     const response = await axios({
       url: `${baseUrl}${endPoint}`,
@@ -26,6 +27,7 @@ export const getRequest = async (endPoint: string) => {
 
 export const postRequest = async (endPoint: string, data: any) => {
   console.log("basurl", baseUrl + endPoint);
+  initializeAuthToken(); 
   try {
     const response = await axios({
       url: `${baseUrl}${endPoint}`,
@@ -53,7 +55,39 @@ export const postRequest = async (endPoint: string, data: any) => {
   }
 };
 
+export const putRequest = async (endPoint: string, data: any) => {
+  console.log("basurl", baseUrl + endPoint);
+  initializeAuthToken(); 
+  try {
+    const response = await axios({
+      url: `${baseUrl}${endPoint}`,
+      method: "PUT",
+
+      headers: {
+        "Content-Type": "application/json",
+        // Connection: "close",
+        Authorization: "Bearer " + global.authToken,
+      },
+      data: data,
+      // timeout: requestTimeout,
+    });
+    return response;
+  } catch (error: any) {
+    if (error.response?.status === 401) {
+      logout("network");
+    } else if (error.response?.status === 400) {
+      if (error.response?.data?.result) {
+        console.log(error.response?.data?.result.toLowerCase());
+        throw error.response?.data?.result.toLowerCase();
+      }
+    }
+    throw error;
+  }
+};
+
+
 export const postRequestMulitiPart = async (endPoint: string, data: {}) => {
+  initializeAuthToken(); 
   try {
     const response = await axios({
       url: `${baseUrl}${endPoint}`,

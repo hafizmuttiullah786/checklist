@@ -97,10 +97,10 @@ const Login: React.FC<LoginProps> = (props) => {
                   </div>
                   <div className="remember_forgot flex">
                     <div className="flex-gap">
-                      <input type="checkbox" />
-                      <span>Remember Me</span>
+                      {/* <input type="checkbox" /> */}
+                      {/* <span>Remember Me</span> */}
                     </div>
-                    <a href="forgotpassowrd" className="forgot__password">
+                    <a href="forgotpassword" className="forgot__password">
                       Forgot Password
                     </a>
                   </div>

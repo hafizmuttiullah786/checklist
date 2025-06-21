@@ -6,9 +6,10 @@ import {
   postForgotPasswordSendOtpService,
   postUserSendOtpService,
   postUserSignUpService,
+  verifyOtpService,
 } from "../services/SignUpService";
 import { Apinames } from "../utils/Apiname";
-import { ISignUpPostBody } from "../types/post/Interface";
+import { ISignUpPostBody, IVerifyOtpPostBody } from "../types/post/Interface";
 
 const OtpScreen = () => {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ const OtpScreen = () => {
       setIsLoading(false);
     }
     setIsLoading(false);
-    console.log("state ::", state);
+    console.log("state ::::::", state);
   }, []);
 
   const updateErrorMessage = (error?: any) => {
@@ -33,16 +34,33 @@ const OtpScreen = () => {
 
   const onSubmitOtpPressed = async (otp: string) => {
     try {
-      let data: ISignUpPostBody = {
-        email: state?.signupData.email,
-        password: state?.signupData.password,
-        otp: otp,
-        name: state?.signupData.firstName + " " + state?.signupData.lastName,
-      };
-      console.log("signUp Payload ::", data);
-      let response = await postUserSignUpService(Apinames.signUp, data);
-      if (response.result && response.result.toLowerCase() === "success") {
-        navigate("/login");
+      if (state?.signupData.forgotPassword) {
+
+        let data: IVerifyOtpPostBody = {
+          email: state?.signupData.email,
+          otp: otp
+        };
+        console.log("signUp Payload ::", data);
+        let response = await verifyOtpService(Apinames.forgotPasswordVerifyOtp, data);
+        if (response.result && response.result.toLowerCase() === "success") {
+          navigate("/login");
+           navigate("/confirmpassword", { state: { signupData: data } });
+        }
+
+      } else {
+
+        let data: ISignUpPostBody = {
+          email: state?.signupData.email,
+          password: state?.signupData.password,
+          otp: otp,
+          name: state?.signupData.firstName + " " + state?.signupData.lastName,
+        };
+        console.log("signUp Payload ::", data);
+        let response = await postUserSignUpService(Apinames.signUp, data);
+        if (response.result && response.result.toLowerCase() === "success") {
+          navigate("/login");
+        }
+
       }
     } catch (error) {
       console.log("onSubmitOtpPressed error::", error);

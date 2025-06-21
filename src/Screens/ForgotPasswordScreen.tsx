@@ -24,7 +24,9 @@ const ForgotPasswordScreen = () => {
       );
       if (response.result.toLowerCase() === "success") {
         setIsLoading(false);
-        if (state?.signupData !== null) {
+        if (state) {
+          console.log("response  false::",);
+
           navigate("/otp", {
             state: {
               signupData: {
@@ -35,6 +37,7 @@ const ForgotPasswordScreen = () => {
             },
           });
         } else {
+          console.log("response  true::",);
           navigate("/otp", {
             state: { signupData: { email, forgotPassword: true } },
           });

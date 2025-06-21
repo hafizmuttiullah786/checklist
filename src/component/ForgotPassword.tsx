@@ -2,7 +2,7 @@ import React from "react";
 import { useFormik } from "formik";
 
 interface ForgotPasswordProps {
-  errorMessage: string;
+  errorMessage: any;
   isLoading: boolean;
   onSendOtpPressed: (email: string) => void;
   updateErrorMessage: (error?: any) => void;

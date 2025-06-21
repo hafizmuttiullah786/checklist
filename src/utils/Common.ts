@@ -1,3 +1,4 @@
+import { IUserProfile } from "../types/post/Interface";
 export const formatViews = (num: number): string => {
   if (num >= 1_000_000) {
     return (num / 1_000_000).toFixed(1).replace(/\.0$/, "") + "M";
@@ -7,19 +8,33 @@ export const formatViews = (num: number): string => {
   return num?.toString();
 };
 
-type CookieData = {
-  msisdn: string;
+export interface CookieData {
+  id: number;
+  name: string;
+  email: string;
+  status: string;
+  role: string;
+  department: string | null;
   token: string;
-};
+}
 
 export const onpressLogoutBtn = () => {
   clearAllCookies();
-  window.location.replace(window.location.origin + "/landing");
+  window.location.replace(window.location.origin + "/login");
 };
 
-export const setCookie = (msisdn: string, token: string): void => {
+export const setCookie = (profile:CookieData): void => {
   clearAllCookies();
-  const data: CookieData = { msisdn, token };
+  
+  const data = {
+    id: profile.id,
+    name: profile.name,
+    email: profile.email,
+    status: profile.status,
+    role: profile.role,
+    department: profile.department,
+    token: profile.token
+  };
   const expirationDate = new Date();
   expirationDate.setDate(expirationDate.getDate() + 30);
 
@@ -53,17 +68,28 @@ export const clearAllCookies = (): void => {
   });
 };
 
-// export const logout = () => {
-//   clearAllCookies();
-//   window.location.replace(window.location.origin + "/landing");
-// };
+
 export const logout = (val: string) => {
-  clearAllCookies();
-  localStorage.removeItem("isLogin");
-  // window.location.replace(window.location.origin + "/landing");
-  if (val === "network") {
-    window.location.href = window.location.origin + "/";
-  } else {
-    window.location.reload();
+  // clearAllCookies();
+  // localStorage.removeItem("isLogin");
+  // if (val === "network") {
+  //   window.location.href = window.location.origin + "/login";
+  // } else {
+  //   window.location.reload();
+  // }
+};
+
+
+export const initializeAuthToken = () => {
+  if (!global.authToken) {
+    const cookie = getCookie("data");
+    if (cookie) {
+      try {
+        global.authToken = cookie?.token || "";
+      } catch (err) {
+        console.error("Invalid cookie for token:", err);
+        global.authToken = "";
+      }
+    }
   }
 };

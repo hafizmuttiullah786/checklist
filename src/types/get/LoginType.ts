@@ -9,4 +9,6 @@ export interface ILoginApiResult {
   name: string;
   email: string;
   token: string;
+   department: string | null;
 }
+

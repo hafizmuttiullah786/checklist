@@ -23,12 +23,13 @@ import CheckList from "./component/CheckList";
 import PaymentInquiry from "./component/PaymentInquiry";
 import NewChecklist from "./component/NewChecklist";
 import Notification from "./component/Notification"
+import ConfirmPasswordScreen from "./Screens/ConfirmPasswordScreen";
 
 function App() {
   return (
     <Routes>
-      {/* <Route path="/*" element={<Navigate to="/profile" replace />} /> */}
-      <Route path="/" element={<Home />} />
+      <Route path="/*" element={<Navigate to="/login" replace />} />
+      <Route path="/home" element={<Home />} />
       <Route path="/billing" element={<Billing />} />
       <Route path="/user-managment" element={<UserManagment />} />
       <Route path="/check-list" element={<CheckList />} />
@@ -38,8 +39,9 @@ function App() {
       <Route path="/notification" element={<Notification/>} />
       <Route path="/login" element={<LoginScreen />} />
       <Route path="/signup" element={<SignupScreen />} />
-      <Route path="/forgotpassowrd" element={<ForgotPasswordScreen />} />
+      <Route path="/forgotpassword" element={<ForgotPasswordScreen />} />
       <Route path="/otp" element={<OtpScreen />} />
+      <Route path="/confirmpassword" element={<ConfirmPasswordScreen />} />
     </Routes>
   );
 }
