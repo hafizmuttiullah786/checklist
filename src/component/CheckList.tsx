@@ -1,9 +1,103 @@
-import React from "react";
+import React, { useState } from "react";
 import SideBar from "./SideBar";
 import TopBar from "./TopBar";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+
 const CheckList = () => {
+  const [show, setShow] = useState(false);
+  const [usershow, setUserShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const UserShowModal = () => setUserShow(true);
+  const userhandleClose = () => setUserShow(false);
+
   return (
     <>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+        centered
+        className="__modal"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>User Detail</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="__userForm">
+            <div className="input_flex">
+              <div className="__inputField">
+                <label htmlFor="">ID</label>
+                <input type="text" />
+              </div>
+              <div className="__inputField">
+                <label htmlFor="">Name</label>
+                <input type="text" />
+              </div>
+            </div>
+            <div className="input_flex">
+              <div className="__inputField">
+                <label htmlFor="">Email</label>
+                <input type="text" />
+              </div>
+              <div className="__inputField">
+                <label htmlFor="">Department</label>
+                <input type="text" />
+              </div>
+            </div>
+            <div className="input_flex">
+              <div className="__inputField">
+                <label htmlFor="">Status</label>
+                <input type="text" />
+              </div>
+              <div className="__inputField">
+                <label htmlFor="">Role</label>
+                <input type="text" />
+              </div>
+            </div>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <button className="submit__btn">Submit</button>
+        </Modal.Footer>
+      </Modal>
+      <Modal
+        show={usershow}
+        onHide={userhandleClose}
+        backdrop="static"
+        keyboard={false}
+        centered
+        className="__modal"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Detail</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="__userForm">
+            <div className="__inputField">
+              <label htmlFor="">ID</label>
+              <input type="text" />
+            </div>
+            <div className="__inputField">
+              <label htmlFor="">Title</label>
+              <input type="text" />
+            </div>
+            <div className="__inputField">
+              <label htmlFor="">Note</label>
+              <input type="text" />
+            </div>
+            <div className="__inputField">
+              <label htmlFor="">Updated At</label>
+              <input type="text" />
+            </div>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <button className="submit__btn">Submit</button>
+        </Modal.Footer>
+      </Modal>
       <div className="__dashboard">
         <div className="__dashboard__wrapper">
           <SideBar />
@@ -39,6 +133,7 @@ const CheckList = () => {
                             <th>Role</th>
                             <th>Overdue Tasks</th>
                             <th>Tasks Completed</th>
+                            <th>Actions</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -52,7 +147,7 @@ const CheckList = () => {
                             <td>
                               <button className="duesoon">Due Soon</button>
                             </td>
-                            <td >
+                            <td>
                               <button className="taskbtn">4 Tasks</button>
                             </td>
                             <td>
@@ -60,6 +155,16 @@ const CheckList = () => {
                                 <div className="percenCompleted"></div>
                               </div>
                               <span>0/5</span>
+                            </td>
+                            <td>
+                              <div className="flex-gap">
+                                <a href="#" onClick={UserShowModal}>
+                                  <i className="ri-error-warning-line"></i>
+                                </a>
+                                <a href="#" onClick={handleShow}>
+                                  <i className="ri-eye-line"></i>
+                                </a>
+                              </div>
                             </td>
                           </tr>
                           <tr>
@@ -72,7 +177,7 @@ const CheckList = () => {
                             <td>
                               <button className="archived">Due Soon</button>
                             </td>
-                            <td >
+                            <td>
                               <button className="taskbtn">4 Tasks</button>
                             </td>
                             <td>
@@ -92,7 +197,7 @@ const CheckList = () => {
                             <td>
                               <button className="completed">Due Soon</button>
                             </td>
-                            <td >
+                            <td>
                               <button className="taskbtn">4 Tasks</button>
                             </td>
                             <td>
@@ -112,9 +217,9 @@ const CheckList = () => {
                             <td>
                               <button className="completed">Due Soon</button>
                             </td>
-                            <td >
+                            <td>
                               <button className="taskbtn">4 Tasks</button>
-                            </td> 
+                            </td>
                             <td>
                               <div className="greenBar">
                                 <div className="green-completed"></div>
@@ -132,7 +237,7 @@ const CheckList = () => {
                             <td>
                               <button className="completed">Due Soon</button>
                             </td>
-                            <td >
+                            <td>
                               <button className="taskbtn">4 Tasks</button>
                             </td>
                             <td>
