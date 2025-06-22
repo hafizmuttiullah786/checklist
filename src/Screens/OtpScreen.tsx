@@ -52,6 +52,7 @@ const OtpScreen = () => {
         let data: ISignUpPostBody = {
           email: state?.signupData.email,
           password: state?.signupData.password,
+          company: state?.signupData.companyName,
           otp: otp,
           name: state?.signupData.firstName + " " + state?.signupData.lastName,
         };

@@ -3,20 +3,26 @@ import SideBar from "./SideBar";
 import TopBar from "./TopBar";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import dayjs from "dayjs";
+// import { FaBell, FaRegEye, FaInfoCircle, FaPaperclip } from "react-icons/fa";
 
-const CheckList = () => {
-  const [show, setShow] = useState(false);
-  const [usershow, setUserShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  const UserShowModal = () => setUserShow(true);
-  const userhandleClose = () => setUserShow(false);
+interface Props {
+  show?: boolean;
+  onPressDetailModal?: () => void;
+  onPressUserModal?: () => void;
+  usershow?: boolean;
+  allList: any[]
+}
+
+
+const CheckList = ({ show, onPressDetailModal, onPressUserModal, usershow, allList }: Props) => {
+
 
   return (
     <>
       <Modal
-        show={show}
-        onHide={handleClose}
+        show={usershow}
+        onHide={onPressUserModal}
         backdrop="static"
         keyboard={false}
         centered
@@ -64,8 +70,8 @@ const CheckList = () => {
         </Modal.Footer>
       </Modal>
       <Modal
-        show={usershow}
-        onHide={userhandleClose}
+        show={show}
+        onHide={onPressDetailModal}
         backdrop="static"
         keyboard={false}
         centered
@@ -124,131 +130,75 @@ const CheckList = () => {
                       <button>Create Checklist</button>
                     </div>
                     <div className="__defaultTable">
+                  
                       <table>
                         <thead>
                           <tr>
-                            <th>User Name</th>
-                            <th>Activity</th>
+                            <th>Title</th>
+                            <th>Description</th>
                             <th>Due Date</th>
-                            <th>Role</th>
-                            <th>Overdue Tasks</th>
-                            <th>Tasks Completed</th>
+                            <th>Priority</th>
+                            <th>Reminder</th>
+                            <th>Attachment</th>
+                            <th>Updated At</th>
                             <th>Actions</th>
                           </tr>
                         </thead>
+
+                        {/* TABLE BODY */}
                         <tbody>
-                          <tr>
-                            <td>
-                              <p> Employee Work </p>
-                              <p> Tools Checklist</p>
-                            </td>
-                            <td>3 hours ago</td>
-                            <td>May 30</td>
-                            <td>
-                              <button className="duesoon">Due Soon</button>
-                            </td>
-                            <td>
-                              <button className="taskbtn">4 Tasks</button>
-                            </td>
-                            <td>
-                              <div className="yellowBar">
-                                <div className="percenCompleted"></div>
-                              </div>
-                              <span>0/5</span>
-                            </td>
-                            <td>
-                              <div className="flex-gap">
-                                <a href="#" onClick={UserShowModal}>
-                                  <i className="ri-error-warning-line"></i>
-                                </a>
-                                <a href="#" onClick={handleShow}>
-                                  <i className="ri-eye-line"></i>
-                                </a>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <p> Employee Work </p>
-                              <p> Tools Checklist</p>
-                            </td>
-                            <td>3 hours ago</td>
-                            <td>May 30</td>
-                            <td>
-                              <button className="archived">Due Soon</button>
-                            </td>
-                            <td>
-                              <button className="taskbtn">4 Tasks</button>
-                            </td>
-                            <td>
-                              <div className="purpleBar">
-                                <div className="yellow-completed"></div>
-                              </div>
-                              <span>2/5</span>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <p> Employee Work </p>
-                              <p> Tools Checklist</p>
-                            </td>
-                            <td>3 hours ago</td>
-                            <td>May 30</td>
-                            <td>
-                              <button className="completed">Due Soon</button>
-                            </td>
-                            <td>
-                              <button className="taskbtn">4 Tasks</button>
-                            </td>
-                            <td>
-                              <div className="greenBar">
-                                <div className="green-completed"></div>
-                              </div>
-                              <span>2/5</span>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <p> Employee Work </p>
-                              <p> Tools Checklist</p>
-                            </td>
-                            <td>3 hours ago</td>
-                            <td>May 30</td>
-                            <td>
-                              <button className="completed">Due Soon</button>
-                            </td>
-                            <td>
-                              <button className="taskbtn">4 Tasks</button>
-                            </td>
-                            <td>
-                              <div className="greenBar">
-                                <div className="green-completed"></div>
-                              </div>
-                              <span>2/5</span>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <p> Employee Work </p>
-                              <p> Tools Checklist</p>
-                            </td>
-                            <td>3 hours ago</td>
-                            <td>May 30</td>
-                            <td>
-                              <button className="completed">Due Soon</button>
-                            </td>
-                            <td>
-                              <button className="taskbtn">4 Tasks</button>
-                            </td>
-                            <td>
-                              <div className="greenBar">
-                                <div className="green-completed"></div>
-                              </div>
-                              <span>2/5</span>
-                            </td>
-                          </tr>
+                          {allList?.length > 0 ? (
+                            allList.map((item) => (
+                              <tr key={item.id}>
+                                <td>{item.title}</td>
+                                <td>{item.description}</td>
+                                <td>{dayjs(item.dueDateTime).format("MMM DD, YYYY hh:mm A")}</td>
+                                <td>
+                                  <button className="priorityBtn">{item.priority}</button>
+                                </td>
+                                <td>
+                                  <i
+                                    className={`ri-notification-3-line ${item.emailReminder ? "text-success" : "text-muted"
+                                      }`}
+                                    title={item.emailReminder ? "Reminder On" : "Reminder Off"}
+                                  ></i>
+                                </td>
+                                <td>
+                                  {item.attachments?.length > 0 ? (
+                                    <a
+                                      href={item.attachments[0].url}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      title="View Attachment"
+                                    >
+                                      <i className="ri-attachment-2"></i>
+                                    </a>
+                                  ) : (
+                                    "-"
+                                  )}
+                                </td>
+                                <td>{dayjs(item.updatedAt).format("MMM DD, YYYY hh:mm A")}</td>
+                                <td>
+                                  <div className="flex-gap">
+                                    <span onClick={onPressUserModal} title="User Info">
+                                      <i className="ri-error-warning-line"></i>
+                                    </span>
+                                    <span onClick={onPressDetailModal} title="View Detail">
+                                      <i className="ri-eye-line"></i>
+                                    </span>
+                                  </div>
+                                </td>
+                              </tr>
+                            ))
+                          ) : (
+                            <tr>
+                              <td colSpan={8}>No checklist found.</td>
+                            </tr>
+                          )}
                         </tbody>
                       </table>
+
+
                     </div>
                     <div className="__NexStep">
                       Next <i className="ri-arrow-right-line"></i>

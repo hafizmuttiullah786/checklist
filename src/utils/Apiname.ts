@@ -7,4 +7,8 @@ export const Apinames = {
   forgotPasswordUpdatePassword:"/forgotPassword/updatePassword",
   notificationAll:"/notification/all",
   notificationRead: "/notification/read",
+
+  // checklist
+  checklistAdd:"/checklist/add",
+  checklistAll:"/checklist/all"
 };

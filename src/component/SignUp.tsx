@@ -4,6 +4,7 @@ import google from "../Assets/imgs/google.webp";
 interface SignUpData {
   firstName: string;
   lastName: string;
+  companyName: string,
   password: string;
   confirmPassword: string;
 }
@@ -19,12 +20,14 @@ const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,40}$/;
 const validate = (values: {
   firstName: string;
   lastName: string;
+  companyName: string,
   password: string;
   confirmPassword: string;
 }) => {
   const errors: {
     firstName?: string;
     lastName?: string;
+    companyName?: string;
     password?: string;
     confirmPassword?: string;
   } = {};
@@ -37,6 +40,11 @@ const validate = (values: {
     errors.lastName = "Last name is required";
   } else if (/^\s/.test(values.lastName)) {
     errors.lastName = "Last name cannot start with a space";
+  }
+  if (!values.companyName) {
+    errors.companyName = "Company name is required";
+  } else if (/^\s/.test(values.companyName)) {
+    errors.companyName = "Company name cannot start with a space";
   }
   if (!values.password) {
     errors.password = "Password is required";
@@ -56,6 +64,7 @@ const SignUp: React.FC<SignUpProps> = (props) => {
     initialValues: {
       firstName: "",
       lastName: "",
+      companyName: "",
       password: "",
       confirmPassword: "",
     },
@@ -137,12 +146,28 @@ const SignUp: React.FC<SignUpProps> = (props) => {
                     onBlur={formik.handleBlur}
                   />
                   {formik.touched.confirmPassword &&
-                  formik.errors.confirmPassword ? (
+                    formik.errors.confirmPassword ? (
                     <div style={{ color: "red", fontSize: "0.9em" }}>
                       {formik.errors.confirmPassword}
                     </div>
                   ) : null}
                 </div>
+              </div>
+              <div className="inputField">
+                <label htmlFor="companyName">Company Name</label>
+                <input
+                  id="companyName"
+                  name="companyName"
+                  type="text"
+                  value={formik.values.companyName}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                />
+                {formik.touched.companyName && formik.errors.companyName ? (
+                  <div style={{ color: "red", fontSize: "0.9em" }}>
+                    {formik.errors.companyName}
+                  </div>
+                ) : null}
               </div>
               <div className="login_btn">
                 <button type="submit">Sign Up</button>

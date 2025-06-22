@@ -6,6 +6,7 @@ export interface ILoginPostBody {
 export interface ISignUpPostBody {
   email: string;
   password: string;
+  company: string;
   otp: string;
   name: string;
 }
