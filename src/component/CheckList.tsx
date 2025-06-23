@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SideBar from "./SideBar";
 import TopBar from "./TopBar";
-import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import dayjs from "dayjs";
-// import { FaBell, FaRegEye, FaInfoCircle, FaPaperclip } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { Spinner } from "react-bootstrap";
 
 interface Props {
   show?: boolean;
@@ -12,15 +12,23 @@ interface Props {
   onPressUserModal?: () => void;
   usershow?: boolean;
   allList: any[]
+  questionList: any[]
+  responsesList: any[]
+  getResponsesList: (checklistId: number) => Promise<void>
+  getQuestionList: (checklistId: number) => Promise<void>
+  loading: boolean
+  mainLoading: boolean
 }
 
 
-const CheckList = ({ show, onPressDetailModal, onPressUserModal, usershow, allList }: Props) => {
+const CheckList = ({ mainLoading, show, onPressDetailModal, onPressUserModal, usershow, allList, loading, questionList, responsesList, getQuestionList, getResponsesList }: Props) => {
+
+  const navigate = useNavigate();
 
 
   return (
     <>
-      <Modal
+      {/* <Modal
         show={usershow}
         onHide={onPressUserModal}
         backdrop="static"
@@ -68,8 +76,8 @@ const CheckList = ({ show, onPressDetailModal, onPressUserModal, usershow, allLi
         <Modal.Footer>
           <button className="submit__btn">Submit</button>
         </Modal.Footer>
-      </Modal>
-      <Modal
+      </Modal> */}
+      {/* <Modal
         show={show}
         onHide={onPressDetailModal}
         backdrop="static"
@@ -78,7 +86,7 @@ const CheckList = ({ show, onPressDetailModal, onPressUserModal, usershow, allLi
         className="__modal"
       >
         <Modal.Header closeButton>
-          <Modal.Title>Detail</Modal.Title>
+          <Modal.Title>Questions</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="__userForm">
@@ -103,7 +111,90 @@ const CheckList = ({ show, onPressDetailModal, onPressUserModal, usershow, allLi
         <Modal.Footer>
           <button className="submit__btn">Submit</button>
         </Modal.Footer>
+      </Modal> */}
+
+      <Modal show={usershow} onHide={onPressUserModal} centered className="__modal" size="lg">
+        <Modal.Header closeButton>
+          <Modal.Title>Checklist Responses</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {responsesList.length > 0 ? (
+            <table className="table table-bordered">
+              <thead>
+                <tr>
+                  <th>User Name</th>
+                  <th>Email</th>
+                  <th>Department</th>
+                  <th>Role</th>
+                  <th>Status</th>
+                  <th>Response</th>
+                </tr>
+              </thead>
+              <tbody>
+                {responsesList.map((res, idx) => (
+                  <tr key={idx}>
+                    <td>{res.user?.name || "N/A"}</td>
+                    <td>{res.user?.email || "N/A"}</td>
+                    <td>{res.user?.department || "N/A"}</td>
+                    <td>{res.user?.role || "N/A"}</td>
+                    <td>{res.user?.status || "N/A"}</td>
+                    <td>
+                      {res.response ? (
+                        <a href={res.response} target="_blank" rel="noopener noreferrer">
+                          Submitted
+                        </a>
+                      ) : (
+                        "Not Submitted"
+                      )}
+                    </td>
+                    <td>
+                      {res.submissionDate
+                        ? dayjs(res.submissionDate).format("MMM DD, YYYY hh:mm A")
+                        : "-"}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <p>No responses found.</p>
+          )}
+        </Modal.Body>
       </Modal>
+
+
+      <Modal show={show} onHide={onPressDetailModal} centered className="__modal" size="lg">
+        <Modal.Header closeButton>
+          <Modal.Title>Checklist Questions</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {questionList.length > 0 ? (
+            <table className="table table-bordered">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Title</th>
+                  <th>Note</th>
+                  <th>Updated At</th>
+                </tr>
+              </thead>
+              <tbody>
+                {questionList.map((q, idx) => (
+                  <tr key={idx}>
+                    <td>{q.id}</td>
+                    <td>{q.title}</td>
+                    <td>{q.note}</td>
+                    <td>{dayjs(q.updatedAt).format("MMM DD, YYYY hh:mm A")}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <p>No questions found.</p>
+          )}
+        </Modal.Body>
+      </Modal>
+
       <div className="__dashboard">
         <div className="__dashboard__wrapper">
           <SideBar />
@@ -114,23 +205,23 @@ const CheckList = ({ show, onPressDetailModal, onPressUserModal, usershow, allLi
               <div className="__myTraining">
                 <div className="billingTop">
                   <div className="statusSelec">
-                    <span>Status</span>
+                    {/* <span>Status</span>
                     <select name="" id="">
                       <option value="">All</option>
-                    </select>
+                    </select> */}
                   </div>
                   <div className="csv_pdf">
-                    <button className="csv">Export to CSV</button>
-                    <button className="pdf_btn">Export to PDF</button>
+                    {/* <button className="csv">Export to CSV</button> */}
+                    {/* <button className="pdf_btn">Export to PDF</button> */}
                   </div>
                 </div>
                 <div className="row">
                   <div className="col-lg-12 col-12">
                     <div className="createChecklist">
-                      <button>Create Checklist</button>
+                      <button onClick={() => navigate("/newchecklist")}>Create Checklist</button>
                     </div>
                     <div className="__defaultTable">
-                  
+
                       <table>
                         <thead>
                           <tr>
@@ -142,12 +233,20 @@ const CheckList = ({ show, onPressDetailModal, onPressUserModal, usershow, allLi
                             <th>Attachment</th>
                             <th>Updated At</th>
                             <th>Actions</th>
+                            <th>Edit</th>
                           </tr>
                         </thead>
 
                         {/* TABLE BODY */}
                         <tbody>
-                          {allList?.length > 0 ? (
+
+                          {mainLoading ? (
+                            <tr>
+                              <td colSpan={8} style={{ textAlign: "center" }}>
+                                <i className="ri-loader-4-line ri-spin" style={{ fontSize: "20px" }}></i> Loading checklist...
+                              </td>
+                            </tr>
+                          ) : allList?.length > 0 ? (
                             allList.map((item) => (
                               <tr key={item.id}>
                                 <td>{item.title}</td>
@@ -165,28 +264,44 @@ const CheckList = ({ show, onPressDetailModal, onPressUserModal, usershow, allLi
                                 </td>
                                 <td>
                                   {item.attachments?.length > 0 ? (
-                                    <a
-                                      href={item.attachments[0].url}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      title="View Attachment"
-                                    >
-                                      <i className="ri-attachment-2"></i>
-                                    </a>
+                                    item.attachments.map((file: any, index: number) => (
+                                      <a
+                                        key={file.id || index}
+                                        href={file.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        title={`View Attachment ${index + 1}`}
+                                        style={{ marginRight: "8px" }}
+                                      >
+                                        <i className="ri-attachment-2"></i>
+                                      </a>
+                                    ))
                                   ) : (
                                     "-"
                                   )}
                                 </td>
                                 <td>{dayjs(item.updatedAt).format("MMM DD, YYYY hh:mm A")}</td>
                                 <td>
-                                  <div className="flex-gap">
-                                    <span onClick={onPressUserModal} title="User Info">
-                                      <i className="ri-error-warning-line"></i>
-                                    </span>
-                                    <span onClick={onPressDetailModal} title="View Detail">
-                                      <i className="ri-eye-line"></i>
-                                    </span>
-                                  </div>
+                                  {!loading ?
+                                    <div className="flex-gap">
+                                      <span onClick={() => getResponsesList(item.id)} title="User Info">
+                                        <i className="ri-error-warning-line"></i>
+                                      </span>
+                                      <span onClick={() => getQuestionList(item.id)} title="View Detail">
+                                        <i className="ri-eye-line"></i>
+                                      </span>
+                                    </div> :
+                                    <Spinner animation="border" role="status" size="sm">
+                                      <span className="visually-hidden">Loading...</span>
+                                    </Spinner>}
+                                </td>
+                                <td>
+                                  <i
+                                    className="ri-edit-2-line"
+                                    style={{ cursor: "pointer" }}
+                                    title="Edit Checklist"
+                                    onClick={() => navigate("/newchecklist", { state: item })}
+                                  ></i>
                                 </td>
                               </tr>
                             ))

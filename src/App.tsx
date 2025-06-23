@@ -26,6 +26,7 @@ import Notification from "./component/Notification"
 import ConfirmPasswordScreen from "./Screens/ConfirmPasswordScreen";
 import NewChecklistScreen from "./Screens/NewChecklistScreen";
 import CheckListScreen from "./Screens/CheckListScreen";
+import UserManagementScreen from "./Screens/UserManagementScreen";
 
 function App() {
   return (
@@ -33,7 +34,7 @@ function App() {
       <Route path="/*" element={<Navigate to="/login" replace />} />
       <Route path="/home" element={<Home />} />
       <Route path="/billing" element={<Billing />} />
-      <Route path="/user-managment" element={<UserManagment />} />
+      <Route path="/usermanagment" element={<UserManagementScreen />} />
       <Route path="/check-list" element={<CheckListScreen />} />
       <Route path="/payment-inquiry" element={<PaymentInquiry />} />
       <Route path="/profile" element={<Profile />} />

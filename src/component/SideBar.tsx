@@ -53,7 +53,7 @@ const SideBar = () => {
             </a>
           </li>
           <li>
-            <a href="/user-managment" className="flex-gap ">
+            <a href="/usermanagment" className="flex-gap ">
               <img src={UserManagment} alt="user" />
               User Managment
             </a>

@@ -3,12 +3,16 @@ import NewChecklist from "../component/NewChecklist";
 import { addCheckListService } from "../services/CheckListService";
 import { Apinames } from "../utils/Apiname";
 import { Modal, Button } from "react-bootstrap";
+import { useLocation } from "react-router-dom";
 
 const NewChecklistScreen = () => {
 
     const [errorMessage, setErrorMessage] = useState("");
     const [showSuccessModal, setShowSuccessModal] = useState(false);
     const [showErrorModal, setShowErrorModal] = useState(false);
+
+    const location = useLocation();
+    const checklistData = location.state;
 
     const handleSubmit = async (values: any) => {
         console.log("Form values submitted:", values);
@@ -52,7 +56,7 @@ const NewChecklistScreen = () => {
         setErrorMessage(msg);
     };
     return (<>
-        <NewChecklist onSubmit={handleSubmit} />;
+        <NewChecklist onSubmit={handleSubmit} defaultValues={checklistData}/>;
         {/* ✅ Success Modal */}
         <Modal show={showSuccessModal} onHide={() => setShowSuccessModal(false)} centered>
             <Modal.Header closeButton>

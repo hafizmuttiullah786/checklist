@@ -4,17 +4,19 @@ import TopBar from "./TopBar";
 import upload from "../Assets/imgs/upload.svg";
 import * as Yup from "yup";
 import { Formik, Form, Field, FieldArray } from "formik";
+import dayjs from "dayjs";
 
 
 interface Props {
   onSubmit: (values: any) => Promise<void>
+  defaultValues?: any;
 }
 const ChecklistSchema = Yup.object().shape({
   title: Yup.string().required("Title is required"),
   duaDateTime: Yup.string().required("Due Date is required"),
   priority: Yup.string().required("Priority is required"),
 });
-const NewChecklist = ({ onSubmit }: Props) => {
+const NewChecklist = ({ onSubmit, defaultValues }: Props) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   return (
     <div className="__dashboard">
@@ -28,7 +30,7 @@ const NewChecklist = ({ onSubmit }: Props) => {
               className="__myTraining"
               style={{ paddingLeft: "40px", paddingRight: "40px" }}
             >
-              <Formik
+              {/* <Formik
                 initialValues={{
                   title: "",
                   description: "",
@@ -42,6 +44,24 @@ const NewChecklist = ({ onSubmit }: Props) => {
                 }}
                 validationSchema={ChecklistSchema}
                 onSubmit={onSubmit}
+              > */}
+
+              <Formik
+                initialValues={{
+                  title: defaultValues?.title || "",
+                  description: defaultValues?.description || "",
+                  duaDateTime: "",
+                  priority: defaultValues?.priority || "",
+                  emailReminder: defaultValues?.emailReminder || false,
+                  attachment: [],
+                  data: {
+                    questions: [
+                      { title: "", note: "" },
+                    ],
+                  },
+                }}
+                validationSchema={ChecklistSchema}
+                onSubmit={onSubmit}
               >
                 {({ values, setFieldValue, handleChange, errors, touched }) => (
                   <Form>
@@ -49,7 +69,7 @@ const NewChecklist = ({ onSubmit }: Props) => {
                       <label htmlFor="">Checklist Title</label>
                       <Field type="text" name="title" />
                       {errors.title && touched.title && (
-                        <div className="error">{errors.title}</div>
+                        <div className="error">{errors.title as string}</div>
                       )}
                     </div>
 
@@ -70,7 +90,7 @@ const NewChecklist = ({ onSubmit }: Props) => {
                           <label htmlFor="">Due Date</label>
                           <Field type="datetime-local" name="duaDateTime" />
                           {errors.duaDateTime && touched.duaDateTime && (
-                            <div className="error">{errors.duaDateTime}</div>
+                            <div className="error">{errors.duaDateTime as string}</div>
                           )}
                         </div>
                       </div>
@@ -84,7 +104,7 @@ const NewChecklist = ({ onSubmit }: Props) => {
                             <option value="Low">Low</option>
                           </Field>
                           {errors.priority && touched.priority && (
-                            <div className="error">{errors.priority}</div>
+                            <div className="error">{errors.priority as string}</div>
                           )}
                         </div>
                       </div>
@@ -100,7 +120,7 @@ const NewChecklist = ({ onSubmit }: Props) => {
                           <FieldArray name="data.questions">
                             {({ push, remove }) => (
                               <>
-                                {values.data.questions.map((q, index) => (
+                                {values.data.questions.map((q: any, index: number) => (
                                   <div key={index} className="mb-3">
                                     <div className="flex-gap mb-2">
                                       <input
