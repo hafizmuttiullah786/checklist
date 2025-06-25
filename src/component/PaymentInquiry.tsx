@@ -19,13 +19,10 @@ const PaymentInquiry = () => {
               <div className="__myTraining">
                 <div className="billingTop">
                   <div className="statusSelec">
-                    <span>Status</span>
-                    <select name="" id="">
-                      <option value="">All</option>
-                    </select>
+                    
                   </div>
                   <div className="csv_pdf">
-                    <button className="csv">Export to CSV</button>
+                    {/* <button className="csv">Export to CSV</button> */}
                     <button className="pdf_btn">Export to PDF</button>
                   </div>
                 </div>

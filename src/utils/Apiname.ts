@@ -10,6 +10,9 @@ export const Apinames = {
 
   // user
   usersAll:"/users/all",
+  usersupdateStatus:"/users/updateStatus",
+  usersStats:"/users/stats",
+  
   usersAddEmployee:"/users/addEmployee",
   // checklist
   checklistAdd: "/checklist/add",

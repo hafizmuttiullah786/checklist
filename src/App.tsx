@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   BrowserRouter,
   Routes,
   Route,
-  useLocation,
-  useSearchParams,
-  useNavigate,
   Navigate,
 } from "react-router-dom";
 import Profile from "./component/Profile";
@@ -16,26 +13,25 @@ import LoginScreen from "./Screens/LoginScreen";
 import SignupScreen from "./Screens/SignupScreen";
 import ForgotPasswordScreen from "./Screens/ForgotPasswordScreen";
 import OtpScreen from "./Screens/OtpScreen";
-import Home from "./component/Home";
 import Billing from "./component/Billing";
-import UserManagment from "./component/UserManagment";
-import CheckList from "./component/CheckList";
 import PaymentInquiry from "./component/PaymentInquiry";
-import NewChecklist from "./component/NewChecklist";
 import Notification from "./component/Notification"
 import ConfirmPasswordScreen from "./Screens/ConfirmPasswordScreen";
 import NewChecklistScreen from "./Screens/NewChecklistScreen";
 import CheckListScreen from "./Screens/CheckListScreen";
 import UserManagementScreen from "./Screens/UserManagementScreen";
+import AllUserScreen from "./Screens/AllUserScreen";
+import HomeScreen from "./Screens/HomeScreen";
 
 function App() {
   return (
     <Routes>
       <Route path="/*" element={<Navigate to="/login" replace />} />
-      <Route path="/home" element={<Home />} />
+      <Route path="/home" element={<HomeScreen />} />
+      <Route path="/alluser" element={<AllUserScreen />} />
       <Route path="/billing" element={<Billing />} />
       <Route path="/usermanagment" element={<UserManagementScreen />} />
-      <Route path="/check-list" element={<CheckListScreen />} />
+      <Route path="/checklist" element={<CheckListScreen />} />
       <Route path="/payment-inquiry" element={<PaymentInquiry />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/newchecklist" element={<NewChecklistScreen/>} />

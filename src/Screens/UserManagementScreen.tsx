@@ -45,7 +45,7 @@ const UserManagementScreen = (props: Props) => {
         password: values.password,
         department: values.department,
         name: values.name,
-        type: "EMPLOYEE",
+        type: values.type,
       };
       const response = await addEmployeeService(
         Apinames.usersAddEmployee,

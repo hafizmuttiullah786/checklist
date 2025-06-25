@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+
 import logo from "../Assets/imgs/logo.webp";
 import home from "../Assets/imgs/home.webp";
 import billing from "../Assets/imgs/billing.webp";
@@ -9,18 +11,18 @@ import paymentinq from "../Assets/imgs/PaymentInq.webp";
 
 const SideBar = () => {
   const [isFormsOpen, setIsFormsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
 
   const toggleFormsMenu = () => {
     setIsFormsOpen(!isFormsOpen);
   };
 
-  const [isOpen, setIsOpen] = useState(false);
+  const isActive = (path: string) => location.pathname === path;
 
   useEffect(() => {
     const toggleHandler = () => setIsOpen((prev) => !prev);
-
     window.addEventListener("toggleSidebar", toggleHandler);
-
     return () => {
       window.removeEventListener("toggleSidebar", toggleHandler);
     };
@@ -29,11 +31,12 @@ const SideBar = () => {
   const handleMenuClick = () => {
     window.dispatchEvent(new Event("toggleSidebar"));
   };
+
   return (
     <>
       <div className={`__sideBar ${isOpen ? "active" : ""}`}>
         <div className="logo">
-          <img src={logo} alt="logo" style={{opacity:"0"}} />
+          <img src={logo} alt="logo" style={{ opacity: "0" }} />
           <a href="#" className="backArrow" onClick={handleMenuClick}>
             <i className="ri-arrow-left-line"></i>
           </a>
@@ -41,42 +44,74 @@ const SideBar = () => {
         <p className="__menuText">MENU</p>
         <ul className="__menuList">
           <li>
-            <a href="/?role=user" className="flex-gap active">
+            <Link
+              to="/home"
+              className={`flex-gap ${
+                location.pathname === "/home" ? "active" : ""
+              }`}
+            >
               <img src={home} alt="home" />
               Home
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/billing" className="flex-gap ">
-                <img src={billing} alt="billing" />
-              Billing
-            </a>
-          </li>
-          <li>
-            <a href="/usermanagment" className="flex-gap ">
-              <img src={UserManagment} alt="user" />
-              User Managment
-            </a>
-          </li>
-          <li>
-            <a href="/check-list" className="flex-gap">
-              <img src={CheckList} alt="checklist" />
-              Checklist
-            </a>
-          </li>
-
-          <li>
-            <a href="/profile" className="flex-gap">
+            <Link
+              to="/profile"
+              className={`flex-gap ${isActive("/profile") ? "active" : ""}`}
+            >
               <img src={profile} alt="profile" />
               My Profile
-            </a>
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/alluser"
+              className={`flex-gap ${isActive("/alluser") ? "active" : ""}`}
+            >
+              <img src={profile} alt="profile" />
+              All Users
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/usermanagment"
+              className={`flex-gap ${
+                isActive("/usermanagment") ? "active" : ""
+              }`}
+            >
+              <img src={UserManagment} alt="user" />
+              User Managment
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/checklist"
+              className={`flex-gap ${isActive("/checklist") ? "active" : ""}`}
+            >
+              <img src={CheckList} alt="checklist" />
+              Checklist
+            </Link>
           </li>
 
           <li>
-            <a href="/payment-inquiry" className="flex-gap">
+            <Link
+              to="/payment-inquiry"
+              className={`flex-gap ${
+                isActive("/payment-inquiry") ? "active" : ""
+              }`}
+            >
               <img src={paymentinq} alt="payment inquiry" />
               Payment Inquiry
-            </a>
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/billing"
+              className={`flex-gap ${isActive("/billing") ? "active" : ""}`}
+            >
+              <img src={billing} alt="billing" />
+              Billing
+            </Link>
           </li>
         </ul>
       </div>
